@@ -77,6 +77,27 @@ public class Plane : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        spriteRenderer.color = Color.red;
+        Debug.Log("Planes in danger");
+
+        if (Vector3.Distance(currentPosition, collision.transform.position) < 0.6)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        spriteRenderer.color = Color.white;
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnMouseDown()
     {
         points = new List<Vector2>();
