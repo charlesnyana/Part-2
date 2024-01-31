@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ public class Plane : MonoBehaviour
     public float minSpeed = 1f;
     public float maxSpeed = 3f;
     float speed;
+
+    public bool canLand;
+
     Vector2 lastPosition;
     LineRenderer lineRenderer;
     Vector2 currentPosition;
@@ -19,6 +23,7 @@ public class Plane : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     public List<Sprite> sprites;
+
 
     private void Start()
     {
@@ -30,12 +35,14 @@ public class Plane : MonoBehaviour
         speed = Random.Range(minSpeed, maxSpeed);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprites[Random.Range(0,sprites.Count)];
-    }
+        spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count)];
+
+        canLand = false;
+}
 
     private void FixedUpdate()
     {
-       currentPosition = new Vector2(transform.position.x, transform.position.y); 
+        currentPosition = new Vector2(transform.position.x, transform.position.y);
         if (points.Count > 0)
         {
             Vector2 direction = points[0] - currentPosition;
@@ -49,26 +56,28 @@ public class Plane : MonoBehaviour
     {
         speed = Random.Range(1, maxSpeed);
 
-        if (Input.GetKey(KeyCode.Space))
+
+        if (canLand)
         {
             landingTimer += 0.1f * Time.deltaTime;
             float interpolation = landing.Evaluate(landingTimer);
             if (transform.localScale.z < 0.1f)
             {
                 Destroy(gameObject);
+                Debug.Log("Plane landed.");
             } else
             {
                 transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, interpolation);
             }
         }
 
-        if(points.Count > 0)
+        if (points.Count > 0)
         {
-            if(Vector2.Distance(currentPosition, points[0]) < newPointThreshold)
+            if (Vector2.Distance(currentPosition, points[0]) < newPointThreshold)
             {
                 points.RemoveAt(0);
 
-                for(int i = 0; i < lineRenderer.positionCount - 2; i++)
+                for (int i = 0; i < lineRenderer.positionCount - 2; i++)
                 {
                     lineRenderer.SetPosition(i, lineRenderer.GetPosition(i + 1));
                 }
@@ -80,7 +89,6 @@ public class Plane : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         spriteRenderer.color = Color.red;
-        Debug.Log("Planes in danger");
 
         if (Vector3.Distance(currentPosition, collision.transform.position) < 0.6)
         {
@@ -92,6 +100,7 @@ public class Plane : MonoBehaviour
     {
         spriteRenderer.color = Color.white;
     }
+
 
     private void OnBecameInvisible()
     {
