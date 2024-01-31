@@ -7,7 +7,9 @@ public class Plane : MonoBehaviour
 {
     public List<Vector2> points;
     public float newPointThreshold = 0.2f;
-    public float speed = 1f;
+    public float minSpeed = 1f;
+    public float maxSpeed = 3f;
+    float speed;
     Vector2 lastPosition;
     LineRenderer lineRenderer;
     Vector2 currentPosition;
@@ -15,12 +17,20 @@ public class Plane : MonoBehaviour
     public AnimationCurve landing;
     float landingTimer;
 
+    SpriteRenderer spriteRenderer;
+    public List<Sprite> sprites;
+
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
+
+        speed = Random.Range(minSpeed, maxSpeed);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = sprites[Random.Range(0,sprites.Count)];
     }
 
     private void FixedUpdate()
@@ -37,6 +47,7 @@ public class Plane : MonoBehaviour
 
     private void Update()
     {
+        speed = Random.Range(1, maxSpeed);
 
         if (Input.GetKey(KeyCode.Space))
         {
