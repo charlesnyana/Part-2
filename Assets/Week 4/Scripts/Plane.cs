@@ -10,6 +10,10 @@ public class Plane : MonoBehaviour
     public float minSpeed = 1f;
     public float maxSpeed = 3f;
     float speed;
+
+    public Collider2D runway;
+    bool canLand = false;
+
     Vector2 lastPosition;
     LineRenderer lineRenderer;
     Vector2 currentPosition;
@@ -19,6 +23,8 @@ public class Plane : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     public List<Sprite> sprites;
+
+    public int score;
 
     private void Start()
     {
@@ -31,6 +37,8 @@ public class Plane : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sprites[Random.Range(0,sprites.Count)];
+
+        score = 0;
     }
 
     private void FixedUpdate()
@@ -49,13 +57,15 @@ public class Plane : MonoBehaviour
     {
         speed = Random.Range(1, maxSpeed);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (canLand)
         {
-            landingTimer += 0.1f * Time.deltaTime;
+            landingTimer += 0.01f * Time.deltaTime;
             float interpolation = landing.Evaluate(landingTimer);
             if (transform.localScale.z < 0.1f)
             {
                 Destroy(gameObject);
+                score++;
+                Debug.Log(score);
             } else
             {
                 transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, interpolation);
@@ -79,12 +89,22 @@ public class Plane : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        spriteRenderer.color = Color.red;
-        Debug.Log("Planes in danger");
-
-        if (Vector3.Distance(currentPosition, collision.transform.position) < 0.6)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Planes"))
         {
-            Destroy(gameObject);
+            spriteRenderer.color = Color.red;
+
+            if (Vector3.Distance(currentPosition, collision.transform.position) < 0.6)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Runway"))
+        {
+            canLand = true;
+        } else
+        {
+            canLand = false;
         }
     }
 

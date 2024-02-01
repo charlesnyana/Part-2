@@ -5,10 +5,12 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
-    public GameObject plane;
+    public GameObject planePrefab;
+    List<GameObject> planes = new List<GameObject>();
     Transform spawner;
     public float interval;
     float currentTime = 1f;
+    public int score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,9 @@ public class Spawner : MonoBehaviour
             transform.position = new Vector3(randomVal, randomVal, 0);
             transform.rotation = Quaternion.Euler(0, 0, randomRotate);
 
-            Instantiate(plane, transform.position, transform.rotation);
+            GameObject plane = Instantiate(planePrefab, transform.position, transform.rotation);
+            planes.Add(plane);
+
             currentTime = 0f;
 
             float randomInterval = Random.Range(1, 5);
