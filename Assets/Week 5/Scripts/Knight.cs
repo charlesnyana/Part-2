@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Knight : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Knight : MonoBehaviour
     public float HP;
     public float maxHP = 5;
     bool isDead;
+    public HPBar HPBar;
 
 
     void Start()
@@ -54,13 +56,13 @@ public class Knight : MonoBehaviour
         if (isDead) return;
 
         clickOnSelf = true;
-        takeDamage(1);
+        gameObject.SendMessage("takeDamage", 1);
     }
     private void OnMouseUp()
     {
         clickOnSelf = false;
     }
-    private void takeDamage(float damage)
+    public void takeDamage(float damage)
     {
         HP -= damage;
 
