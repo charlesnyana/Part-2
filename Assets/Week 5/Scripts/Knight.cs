@@ -11,6 +11,7 @@ public class Knight : MonoBehaviour
     Vector2 movement;
     public float speed = 3f;
     Animator animator;
+    Collider2D col;
     bool clickOnSelf = false;
     public float HP;
     public float maxHP = 5;
@@ -22,6 +23,7 @@ public class Knight : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        col = GetComponent<Collider2D>();
 
         HP = maxHP;
         isDead = false;
