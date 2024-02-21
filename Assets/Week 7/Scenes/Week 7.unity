@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 150068376}
   - component: {fileID: 150068379}
   - component: {fileID: 150068378}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b5b0da76ade304bb4e772d02df68b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCharge: 0
+  maxCharge: 1
   chargeSlider: {fileID: 1816345740}
 --- !u!4 &375408969
 Transform:
@@ -3510,10 +3510,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 777268256}
+  - component: {fileID: 777268259}
   - component: {fileID: 777268255}
   - component: {fileID: 777268258}
   - component: {fileID: 777268257}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3649,6 +3650,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &777268259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777268252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2dd5950a2931646a22a6b02960c09a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &955054078
 GameObject:
   m_ObjectHideFlags: 0

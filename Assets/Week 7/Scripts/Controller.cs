@@ -12,7 +12,11 @@ public class Controller : MonoBehaviour
     public float maxCharge = 1;
     public Slider chargeSlider;
 
+    public static float score { get; private set; }
+
     public static FootballPlayer SelectedPlayer { get; private set; }
+
+
 
     public static void SetSelectedPlayer(FootballPlayer player)
     {
