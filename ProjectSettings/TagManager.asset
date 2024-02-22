@@ -14,7 +14,7 @@ TagManager:
   - Planes
   - Ball
   - Goal
-  - 
+  - Goalee
   - 
   - 
   - 
@@ -40,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Goalee
+    uniqueID: 1956525107
     locked: 0

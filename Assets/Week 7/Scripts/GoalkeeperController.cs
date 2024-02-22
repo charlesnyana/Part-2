@@ -10,7 +10,7 @@ public class GoalkeeperController : MonoBehaviour
     Vector2 activePlayer;
     Vector2 pivotPoint;
     Vector2 halfPoint;
-    float distance;
+    public float speed = 1f;
 
     void Start()
     {
@@ -23,17 +23,16 @@ public class GoalkeeperController : MonoBehaviour
     void FixedUpdate()
     {
         // gets active selected player's position and stores it.
-        if (Controller.SelectedPlayer != null)
+        if (Controller.SelectedPlayer == null)
+        {
+            transform.position = pivotPoint;
+        } else
         {
             activePlayer = Controller.SelectedPlayer.transform.position;
 
-            halfPoint = (activePlayer + pivotPoint)/2;
+            halfPoint = (activePlayer + pivotPoint) / 2;
 
-            if (rb.position != halfPoint)
-            {
-                rb.MovePosition(halfPoint);
-            }
-            
+            transform.position = Vector2.MoveTowards(transform.position, halfPoint, speed * Time.deltaTime);
 
         }
 
