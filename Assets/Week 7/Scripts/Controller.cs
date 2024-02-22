@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
+using TMPro;
 
 public class Controller : MonoBehaviour
 {
@@ -12,11 +13,10 @@ public class Controller : MonoBehaviour
     public float maxCharge = 1;
     public Slider chargeSlider;
 
-    public static float score { get; private set; }
+    public static float score = 0;
+    public TextMeshProUGUI scoreboard;
 
     public static FootballPlayer SelectedPlayer { get; private set; }
-
-
 
     public static void SetSelectedPlayer(FootballPlayer player)
     {
@@ -40,17 +40,22 @@ public class Controller : MonoBehaviour
     }
     private void Update()
     {
+        if (Ball.resetBall)
+        {
+            scoreboard.text = ("SCORE: " + score.ToString());
+        }
+
         if (SelectedPlayer == null) return;
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
             charge = 0;
+            Mathf.Clamp(charge, 0, maxCharge);
             direction = Vector2.zero;
         }
         if(Input.GetKey(KeyCode.Space))
         {
             charge += Time.deltaTime;
-            Mathf.Clamp(charge, 0, maxCharge);
             chargeSlider.value = charge;
         }
         if(Input.GetKeyUp(KeyCode.Space))
