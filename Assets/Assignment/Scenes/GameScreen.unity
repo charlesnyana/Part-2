@@ -354,7 +354,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8930711d679024b9b229f650107c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attuneUI: {fileID: 1099949129}
+  attuneUI: {fileID: 1099949131}
+  attuneGem:
+  - {fileID: 21300000, guid: 3c3df72bef4f790478c8cfa6c0b6ac36, type: 3}
+  - {fileID: 21300000, guid: 25c564342ab77954090917136e388ff0, type: 3}
+  - {fileID: 21300000, guid: dba6ece78df2112458fb8bc01131bfb1, type: 3}
+  attuneColor:
+  - {r: 0.15686275, g: 0.4156863, b: 1, a: 1}
+  - {r: 0.81568635, g: 0.27058825, b: 0.3019608, a: 1}
+  - {r: 0.82745105, g: 0.7411765, b: 0.32941177, a: 1}
   shield: {fileID: 1153586810}
 --- !u!114 &962896651
 MonoBehaviour:
@@ -469,7 +477,7 @@ GameObject:
   - component: {fileID: 1099949132}
   - component: {fileID: 1099949131}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Attunement UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -507,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.07035423, g: 0.70350266, b: 0.8773585, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -666,7 +674,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.08627451, g: 0.7019608, b: 0.87843144, a: 1}
+  m_Color: {r: 0.15686275, g: 0.4156863, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
