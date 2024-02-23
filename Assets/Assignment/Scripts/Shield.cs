@@ -10,19 +10,22 @@ public class Shield : MonoBehaviour
     Vector2 movement;
     Vector2 destination;
     public float speed = 1f;
-    float currentDegree = 0;
+    float minDegree = 0f;
     float maxDegree = 90f;
-    public float rSpeed = 1f;
+    float currentDegree;
+    public float rSpeed = 30f;
+    bool rHorizontally = false;
+    bool rVertically = false;
 
     Rigidbody2D rb;
 
-    bool isHorizontal;
+    bool isVertical;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        isHorizontal = true;
+        isVertical = true;
     }
 
     private void FixedUpdate()
@@ -37,15 +40,26 @@ public class Shield : MonoBehaviour
         rb.MovePosition(rb.position + movement.normalized * speed * Time.deltaTime);
 
         // shield rotate logic
-        
+        // rotates shield horizontally
+        if (rHorizontally && !rVertically)
         {
-            // rotates 90 degrees
-            if (isHorizontal)
+            currentDegree += rSpeed*Time.deltaTime;
+            rb.rotation = currentDegree;
+            if (currentDegree >= maxDegree)
             {
-                rb.rotation = currentDegree;
-            } else
+                rHorizontally=false;
+                Debug.Log("horizontal rotating finished.");
+            }
+        }
+        //rotates shield vertically
+        if (!rHorizontally && rVertically)
+        {
+            currentDegree -= rSpeed * Time.deltaTime;
+            rb.rotation = currentDegree;
+            if (currentDegree <= minDegree)
             {
-                rb.rotation = maxDegree;
+                rVertically = false;
+                Debug.Log("vertical rotating finished.");
             }
         }
     }
@@ -62,8 +76,19 @@ public class Shield : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
         {
-            isHorizontal = !isHorizontal;
-            Debug.Log("Is shield horizontal? " + isHorizontal);
+            // checks if shield is vertical
+            if (isVertical && !rVertically && !rHorizontally)
+            {
+                rHorizontally = true;
+                Debug.Log("Rotating initiated to horizontal position.");
+                isVertical = !isVertical;
+            }
+            if (!isVertical && !rVertically && !rHorizontally)
+            {
+                rVertically = true;
+                Debug.Log("Rotating initiated to vertical position.");
+                isVertical = !isVertical;
+            }
         }
     }
 }
