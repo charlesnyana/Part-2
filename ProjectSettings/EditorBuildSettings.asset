@@ -8,13 +8,22 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Week 4/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Week 6/Scenes/Scene A.unity
     guid: a29a05c7ae9737546a333a3a08b9840b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Week 6/Scenes/Scene B.unity
     guid: 95ec107615bcb1d42a027749718c7aa1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Week 5/Scenes/Week5.unity
     guid: da50237197b338c44b594daf8536599c
+  - enabled: 1
+    path: Assets/Assignment/Scenes/WardWizard StartScreen.unity
+    guid: cba042cdf15b50545abf5a7d48e65f64
+  - enabled: 1
+    path: Assets/Assignment/Scenes/GameScreen.unity
+    guid: 80561a7dbbadd03438938a55fa6e29f9
+  - enabled: 1
+    path: Assets/Assignment/Scenes/WardWizard GameOver.unity
+    guid: 84f2e2e317536734c9d39e3e8db4ae81
   m_configObjects: {}

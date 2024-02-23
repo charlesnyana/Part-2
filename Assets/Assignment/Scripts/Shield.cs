@@ -3,9 +3,8 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class Shield : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,11 +15,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
-
-    }
-    public void loadNextScene()
-    {
-
+        
     }
 }
