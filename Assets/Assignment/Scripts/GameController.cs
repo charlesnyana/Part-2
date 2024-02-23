@@ -7,20 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject attuneUI;
+    public GameObject shield;
+
+    public void takeDmg()
+    {
+
+    }
+
+    void attuneBlue()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
- 
-
-    }
-    public void loadNextScene()
-    {
-
-    }
 }
