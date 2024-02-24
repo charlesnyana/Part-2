@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.LowLevel;
 
 public class GameController : MonoBehaviour
 {
@@ -16,10 +17,16 @@ public class GameController : MonoBehaviour
     public GameObject shield;
     SpriteRenderer shieldSR;
 
+    public GameObject player;
+    public static Vector2 playerLoc { get; private set; }
+
+
+
     private void Start()
     {
         attuneIndex = 0;
         shieldSR = shield.GetComponent<SpriteRenderer>();
+        
     }
 
     private void Update()
@@ -31,11 +38,14 @@ public class GameController : MonoBehaviour
             Debug.Log("Attunment index: " +attuneIndex);
             attune(attuneIndex);
         }
+        findPlayer(player);
+        
     }
 
-    public void takeDmg()
+    public static void findPlayer(GameObject player)
     {
-
+        playerLoc = player.transform.position;
+        Debug.Log("player is at: " + playerLoc);
     }
 
     void attune(int attunetype)
