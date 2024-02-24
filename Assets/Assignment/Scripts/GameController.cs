@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public Image attuneUI;
-    public List <Sprite> attuneGem = new List<Sprite>();
-    public List <Color> attuneColor = new List<Color>();
+    public List <Sprite> attuneGem = new List<Sprite>(); // 0 is blue, 1 is red, 2 is yellow.
+    public List <Color> attuneColor = new List<Color>(); // 0 is blue, 1 is red, 2 is yellow.
     int attuneIndex;
 
 
