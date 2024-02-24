@@ -48,6 +48,7 @@ public class Shield : MonoBehaviour
             if (currentDegree >= maxDegree)
             {
                 rHorizontally=false;
+                transform.localEulerAngles = new Vector3(0, 0, 90); //locks it onto 90 degrees
                 Debug.Log("horizontal rotating finished.");
             }
         }
@@ -59,6 +60,7 @@ public class Shield : MonoBehaviour
             if (currentDegree <= minDegree)
             {
                 rVertically = false;
+                transform.localEulerAngles = new Vector3(0, 0, 0); //locks it back to vertical block
                 Debug.Log("vertical rotating finished.");
             }
         }

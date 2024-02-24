@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     public Image attuneUI;
     public List <Sprite> attuneGem = new List<Sprite>(); // 0 is blue, 1 is red, 2 is yellow.
     public List <Color> attuneColor = new List<Color>(); // 0 is blue, 1 is red, 2 is yellow.
-    int attuneIndex;
+    public static int attuneIndex;
 
 
     public GameObject shield;
@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public GameObject player;
     public static Vector2 playerLoc { get; private set; }
 
+    public GameObject missile;
 
 
     private void Start()
@@ -40,18 +41,27 @@ public class GameController : MonoBehaviour
         }
         findPlayer(player);
         
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            missileSpawner();
+            
+        }
     }
 
     public static void findPlayer(GameObject player)
     {
         playerLoc = player.transform.position;
-        Debug.Log("player is at: " + playerLoc);
     }
 
     void attune(int attunetype)
     {
         attuneUI.sprite = attuneGem[attunetype]; // 0 is blue, 1 is red, 2 is yellow.
         shieldSR.color = attuneColor[attunetype];
+    }
+
+    void missileSpawner()
+    {
+        Instantiate(missile);
     }
 
 }
