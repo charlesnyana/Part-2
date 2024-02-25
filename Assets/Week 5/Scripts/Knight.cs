@@ -74,7 +74,6 @@ public class Knight : MonoBehaviour
     public void takeDamage(float damage)
     {
         HP -= damage;
-
         HP = Mathf.Clamp(HP, 0, maxHP);
 
         if (HP <= 0)

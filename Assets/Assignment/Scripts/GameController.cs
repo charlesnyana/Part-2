@@ -22,18 +22,33 @@ public class GameController : MonoBehaviour
 
     public GameObject missile;
 
+    public float minInterval = 2f;
+    public float maxInterval = 7f;
+    float interval;
+    float currentTime;
+
 
     private void Start()
     {
         attuneIndex = 0;
         shieldSR = shield.GetComponent<SpriteRenderer>();
+
+        float randomInterval = Random.Range(minInterval, maxInterval+1);
+        interval = randomInterval * Time.deltaTime;
+
         
+    }
+
+    private void FixedUpdate()
+    {
+        currentTime += Time.deltaTime * 1;
+               
     }
 
     private void Update()
     {
         // Attunement system trigger. Will cycle between attunement types on spacebar.
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             attuneIndex = (attuneIndex + 1) % 3; // caps at 3
             Debug.Log("Attunment index: " +attuneIndex);
@@ -41,10 +56,10 @@ public class GameController : MonoBehaviour
         }
         findPlayer(player);
         
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if(currentTime - 1 >= interval)
         {
             missileSpawner();
-            
+            currentTime = 0; // reset timer
         }
     }
 

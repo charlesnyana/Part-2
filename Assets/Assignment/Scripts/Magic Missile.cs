@@ -7,6 +7,7 @@ using UnityEngine;
 public class MagicMissile : MonoBehaviour
 {
     Rigidbody2D rb;
+    PolygonCollider2D col;
 
     Vector2 movement;
     public float speed = 3f;
@@ -23,26 +24,27 @@ public class MagicMissile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col =GetComponent<PolygonCollider2D>();
 
         // spawn cases either 1-3
-        rSpawnIndex = Random.Range(1, 3);
+        rSpawnIndex = Random.Range(1, 4);
         //spawn somewhere along the 6 y-axis
-        spawnX = Random.Range(-10, 10);
-        spawnY = Random.Range(-2, 6);
+        spawnX = Random.Range(-11, 11);
+        spawnY = Random.Range(-3, 7);
 
         if (rSpawnIndex == 1)
         {
             //spawns on top of game screen
             spawnLoc = new Vector2(spawnX, 6);
             transform.position = spawnLoc;
-            Debug.Log("missile spawned at: case 1");
+            //Debug.Log("missile spawned at: case 1");
         }
         if (rSpawnIndex == 2)
         {
             //spawns out left of game screen
             spawnLoc = new Vector2(-10, spawnY);
             transform.position = spawnLoc;
-            Debug.Log("missile spawned at: case 2");
+            //Debug.Log("missile spawned at: case 2");
         }
 
         if (rSpawnIndex == 3)
@@ -50,7 +52,7 @@ public class MagicMissile : MonoBehaviour
             //spawns out right of game screen
             spawnLoc = new Vector2(10, spawnY);
             transform.position = spawnLoc;
-            Debug.Log("missile spawned at: case 3");
+            //Debug.Log("missile spawned at: case 3");
         }
 
 
@@ -74,4 +76,22 @@ public class MagicMissile : MonoBehaviour
     {
         playerLoc = GameController.playerLoc; //finds player location and updates it.
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Shield"))
+        {
+            Destroy(gameObject);
+            // insert points system here
+        }
+
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Player")) // if missile hits player
+        {
+            collider.SendMessage("takeDamage", 1, SendMessageOptions.DontRequireReceiver);
+            Destroy(gameObject);
+
+        }
+    }
 }
+
+
