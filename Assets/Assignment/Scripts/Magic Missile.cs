@@ -54,9 +54,6 @@ public class MagicMissile : MonoBehaviour
             transform.position = spawnLoc;
             //Debug.Log("missile spawned at: case 3");
         }
-
-
-
     }
 
     private void FixedUpdate()
@@ -75,6 +72,11 @@ public class MagicMissile : MonoBehaviour
     void Update()
     {
         playerLoc = GameController.playerLoc; //finds player location and updates it.
+
+        if (Wizard.dead && gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

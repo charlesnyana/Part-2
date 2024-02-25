@@ -35,14 +35,11 @@ public class GameController : MonoBehaviour
 
         float randomInterval = Random.Range(minInterval, maxInterval+1);
         interval = randomInterval * Time.deltaTime;
-
-        
     }
 
     private void FixedUpdate()
     {
         currentTime += Time.deltaTime * 1;
-               
     }
 
     private void Update()
@@ -50,14 +47,16 @@ public class GameController : MonoBehaviour
         // Attunement system trigger. Will cycle between attunement types on spacebar.
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (Wizard.dead) return;
             attuneIndex = (attuneIndex + 1) % 3; // caps at 3
-            Debug.Log("Attunment index: " +attuneIndex);
+            Debug.Log("Attunment index: " + attuneIndex);
             attune(attuneIndex);
         }
         findPlayer(player);
         
         if(currentTime - 1 >= interval)
         {
+            if (Wizard.dead) return;
             missileSpawner();
             currentTime = 0; // reset timer
         }

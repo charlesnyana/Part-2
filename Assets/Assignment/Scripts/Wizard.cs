@@ -11,11 +11,12 @@ public class Wizard : MonoBehaviour
     
     public static float health;
     public float maxHealth = 10f;
-    bool dead = false;
+    public static bool dead;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        dead = false;
 
         health = maxHealth;
     }
@@ -33,19 +34,22 @@ public class Wizard : MonoBehaviour
         {
             dead = false;
             health = maxHealth;
+            healthBar.value = health;
+            animator.SetTrigger("Death");
         }
     }
 
     public void takeDamage(int amount)
     {
         health -= amount;
-        healthBar.value = health;
+        healthBar.value -= amount;
 
         Debug.Log("took damage. health: " + health);
 
         if (health <= 0)
         {
             dead = true;
+            Debug.Log("DEAD TRUE.");
 
         }
         else
