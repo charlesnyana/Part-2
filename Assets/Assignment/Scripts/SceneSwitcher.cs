@@ -17,12 +17,6 @@ public class SceneSwitcher : MonoBehaviour
     void Update()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
-        //if (currentScene == 1 && Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Debug.Log("Scene to Week 5");
-        //    loadNextScene();
-        //}
-
     }
 
     public void loadNextScene()

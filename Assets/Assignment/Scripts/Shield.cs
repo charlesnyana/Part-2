@@ -76,7 +76,7 @@ public class Shield : MonoBehaviour
             Debug.Log(destination);
         }
 
-        if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             // checks if shield is vertical
             if (isVertical && !rVertically && !rHorizontally)

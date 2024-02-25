@@ -7,7 +7,8 @@ using UnityEngine;
 public class MagicMissile : MonoBehaviour
 {
     Rigidbody2D rb;
-    PolygonCollider2D col;
+    CircleCollider2D col;
+    SpriteRenderer sr;
 
     Vector2 movement;
     public float speed = 3f;
@@ -18,13 +19,15 @@ public class MagicMissile : MonoBehaviour
     float spawnY;
     Vector2 spawnLoc;
 
+    int attuneMissile;
     
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        col =GetComponent<PolygonCollider2D>();
+        col =GetComponent<CircleCollider2D>();
+        sr = col.GetComponent<SpriteRenderer>();
 
         // spawn cases either 1-3
         rSpawnIndex = Random.Range(1, 4);
@@ -54,7 +57,13 @@ public class MagicMissile : MonoBehaviour
             transform.position = spawnLoc;
             //Debug.Log("missile spawned at: case 3");
         }
-    }
+        
+
+        attuneMissile = Random.Range(0, 3); //selects the attunement
+        if (attuneMissile == 0) sr.color = Color.blue; // blue
+        if (attuneMissile == 1) sr.color = Color.red; // red
+        if (attuneMissile == 2) sr.color = Color.yellow; // yellow
+       }
 
     private void FixedUpdate()
     {
@@ -63,7 +72,6 @@ public class MagicMissile : MonoBehaviour
         if (movement.magnitude < 0.1) // might remove this part once destroy logic is placed.
         {
             movement = Vector2.zero;
-            
         }
         rb.MovePosition(rb.position + movement.normalized * speed * Time.deltaTime);
     }
@@ -81,7 +89,7 @@ public class MagicMissile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.layer == LayerMask.NameToLayer("Shield"))
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Shield") && attuneMissile == GameController.attuneIndex)
         {
             Destroy(gameObject);
             // insert points system here
@@ -93,7 +101,7 @@ public class MagicMissile : MonoBehaviour
             Destroy(gameObject);
 
         }
+        }
     }
-}
 
 

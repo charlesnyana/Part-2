@@ -44,8 +44,8 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        // Attunement system trigger. Will cycle between attunement types on spacebar.
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Attunement system trigger. Will cycle between attunement types on right click.
+        if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (Wizard.dead) return;
             attuneIndex = (attuneIndex + 1) % 3; // caps at 3
