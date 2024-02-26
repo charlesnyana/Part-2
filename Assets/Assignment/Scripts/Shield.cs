@@ -70,13 +70,13 @@ public class Shield : MonoBehaviour
     void Update()
     {
         // gets coords for destination of shield on left click.
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !Wizard.dead)
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Debug.Log(destination);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !Wizard.dead)
         {
             // checks if shield is vertical
             if (isVertical && !rVertically && !rHorizontally)

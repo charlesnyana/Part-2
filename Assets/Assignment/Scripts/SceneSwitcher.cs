@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    // This script handles the reset and game states, alongside switching screens
     void Start()
     {
         
