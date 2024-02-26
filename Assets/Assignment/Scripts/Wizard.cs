@@ -98,6 +98,5 @@ public class Wizard : MonoBehaviour
         dead = false;
         health = maxHealth;
         healthBar.value = health;
-        //animator.SetTrigger("Death");
     }
 }
