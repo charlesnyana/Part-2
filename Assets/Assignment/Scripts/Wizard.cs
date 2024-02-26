@@ -16,11 +16,14 @@ public class Wizard : MonoBehaviour
 
     Vector2 movement;
 
-    public GameObject gameOverBtn;
+    public GameObject gameOverUI;
+    
     float shrinkTimer;
     public AnimationCurve shrink;
+    Vector3 baseScale;
+    Vector3 basePos;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -28,6 +31,8 @@ public class Wizard : MonoBehaviour
         dead = false;
 
         health = maxHealth;
+        baseScale = transform.localScale;
+        basePos = transform.localPosition;
     }
 
     private void FixedUpdate()
@@ -36,15 +41,18 @@ public class Wizard : MonoBehaviour
         
         if (dead)
         {
-            shrinkTimer = 0.1f * Time.deltaTime;
+            shrinkTimer = 6f * Time.deltaTime;
+            float interpolate = shrink.Evaluate(shrinkTimer);
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, interpolate);
+        } else
+        {
+            transform.localScale = baseScale;
         }
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxis("Horizontal");
+        if (!dead) movement.x = Input.GetAxis("Horizontal");
         if (movement.x > 0)
         {
             animator.SetTrigger("Start Run");
@@ -60,18 +68,10 @@ public class Wizard : MonoBehaviour
         if (dead)
         {
             animator.SetTrigger("Death");
-            gameOverBtn.SetActive(true);
+            gameOverUI.SetActive(true);
         } else
         {
-            gameOverBtn.SetActive(false);
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            dead = false;
-            health = maxHealth;
-            healthBar.value = health;
-            animator.SetTrigger("Death");
+            gameOverUI.SetActive(false);
         }
     }
 
@@ -85,13 +85,19 @@ public class Wizard : MonoBehaviour
         if (health <= 0)
         {
             dead = true;
-            Debug.Log("DEAD TRUE.");
-
         }
         else
         {
             dead = false;
             animator.SetTrigger("TakeDamage");
         }
+    }
+
+    public void resetGame()
+    {
+        dead = false;
+        health = maxHealth;
+        healthBar.value = health;
+        //animator.SetTrigger("Death");
     }
 }

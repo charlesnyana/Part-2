@@ -23,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Assignment/Scenes/GameScreen.unity
     guid: 80561a7dbbadd03438938a55fa6e29f9
-  - enabled: 1
-    path: Assets/Assignment/Scenes/WardWizard GameOver.unity
-    guid: 84f2e2e317536734c9d39e3e8db4ae81
   m_configObjects: {}
